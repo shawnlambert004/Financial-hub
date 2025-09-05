@@ -1,6 +1,7 @@
 package com.shawn.financial_hub;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import com.shawn.financial_hub.User;
@@ -20,8 +21,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public User login(@RequestBody User exUser) {
-        return userService.login(exUser.getUserName(), exUser.getPassword());
+    public ResponseEntity<?> login(@RequestBody User exUser) {
+        User user = userService.login(exUser.getUserName(), exUser.getPassword());
+        if (user != null) {
+            return ResponseEntity.ok(user);
+
+        } else {
+            return ResponseEntity.status(401).body("Invalid Credentials");
+        }
     }
 
 } // UserControllere
