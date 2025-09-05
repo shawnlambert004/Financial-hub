@@ -1,7 +1,10 @@
 package com.shawn.financial_hub;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "application_users")
 public class User {
@@ -16,44 +19,44 @@ public class User {
     private String last_name;
 
     @Column(name = "username")
-    private String userName;
+    private String username;
 
     @Column(name = "password")
-    private String passWord;
+    private String password;
 
     public User() {
     };
 
-    public String getFirstName() {
+    public String getFirst_name() {
         return first_name;
     };
 
-    public void setFirstName(String first_name) {
+    public void setFirst_name(String first_name) {
         this.first_name = first_name;
     };
 
-    public String getLastName() {
+    public String getLast_name() {
         return last_name;
     };
 
-    public void setLastName(String last_name) {
+    public void setLast_name(String last_name) {
         this.last_name = last_name;
     };
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     };
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     };
 
     public String getPassword() {
-        return passWord;
+        return password;
     };
 
-    public void setPassword(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     };
 
     public Long getId() {

@@ -22,11 +22,10 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User exUser) {
-        User user = userService.login(exUser.getUserName(), exUser.getPassword());
-        if (user != null) {
+        try {
+            User user = userService.login(exUser.getUsername(), exUser.getPassword());
             return ResponseEntity.ok(user);
-
-        } else {
+        } catch (RuntimeException error) {
             return ResponseEntity.status(401).body("Invalid Credentials");
         }
     }

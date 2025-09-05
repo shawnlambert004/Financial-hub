@@ -20,18 +20,18 @@ public class UserService {
     }
 
     public User registerUser(User newUser) {
-        if (userRepo.findByUserName(newUser.getUserName()) != null) {
-            throw new RuntimeException("Username" + newUser.getUserName() + " is taken.");
+        if (userRepo.findByUsername(newUser.getUsername()) != null) {
+            throw new RuntimeException("Username" + newUser.getUsername() + " is taken.");
         } else {
             saveUser(newUser);
             return newUser;
         }
     }
 
-    public User login(String UserName, String Password) {
-        User existingUser = userRepo.findByUserName(UserName);
+    public User login(String username, String password) {
+        User existingUser = userRepo.findByUsername(username);
         if (existingUser != null) {
-            if (Password.equals(existingUser.getPassword())) {
+            if (password.equals(existingUser.getPassword())) {
                 return existingUser;
             } else {
                 throw new RuntimeException("Incorrect Password");
