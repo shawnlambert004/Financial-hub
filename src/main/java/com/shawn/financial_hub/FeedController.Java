@@ -3,6 +3,7 @@ package com.shawn.financial_hub;
 import com.shawn.financial_hub.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
@@ -19,16 +20,17 @@ public class FeedController {
     UserRepo userRepo;
 
     @PostMapping("/addUrl")
-    public void addUrl(@RequestBody String url, @RequestBody String userId) {
-        User userPossible = userRepo.findByUsername(userId);
+    public ResponseEntity<?> addUrl(@RequestParam String url, @RequestParam String username) {
+        User userPossible = userRepo.findByUsername(username);
         if (userPossible == null) {
-            throw new RuntimeException("No User associated with URL");
+            return ResponseEntity.status(401).body("No User associated with URL");
         }
         feedService.addUrl(url, userPossible);
+        return ResponseEntity.ok(userPossible);
     }
 
     @PostMapping("/delUrl")
-    public void delUrl(@RequestBody String url) {
+    public void delUrl(@RequestParam String url) {
         feedService.deleteUrl(url);
     }
 }
