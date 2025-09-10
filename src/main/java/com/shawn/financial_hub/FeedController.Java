@@ -19,17 +19,16 @@ public class FeedController {
     UserRepo userRepo;
 
     @PostMapping("/addUrl")
-    public void addUrl(@RequestParam String url, @RequestParam Long userId) {
-        Optional<User> userPossible = userRepo.findById(userId);
-        if (userPossible.isEmpty()) {
+    public void addUrl(@RequestBody String url, @RequestBody String userId) {
+        User userPossible = userRepo.findByUsername(userId);
+        if (userPossible == null) {
             throw new RuntimeException("No User associated with URL");
         }
-        User user = userPossible.get();
-        feedService.addUrl(url, user);
+        feedService.addUrl(url, userPossible);
     }
 
     @PostMapping("/delUrl")
-    public void delUrl(@RequestParam String url) {
+    public void delUrl(@RequestBody String url) {
         feedService.deleteUrl(url);
     }
 }
