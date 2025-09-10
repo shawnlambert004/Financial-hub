@@ -20,12 +20,12 @@ public class FeedController {
     UserRepo userRepo;
 
     @PostMapping("/addUrl")
-    public ResponseEntity<?> addUrl(@RequestParam String url, @RequestParam String username) {
-        User userPossible = userRepo.findByUsername(username);
+    public ResponseEntity<?> addUrl(@RequestBody feedDTO feed) {
+        User userPossible = userRepo.findByUsername(feed.username);
         if (userPossible == null) {
             return ResponseEntity.status(401).body("No User associated with URL");
         }
-        feedService.addUrl(url, userPossible);
+        feedService.addUrl(feed.url, userPossible);
         return ResponseEntity.ok(userPossible);
     }
 
