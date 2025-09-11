@@ -40,5 +40,10 @@ public class UserService {
             throw new RuntimeException("User does not Exist");
         }
     }
+
+    public Long getUserId(String username) {
+        User userboy = userRepo.findByUsername(username);
+        return userboy.getId();
+    }
 }
 // UserService

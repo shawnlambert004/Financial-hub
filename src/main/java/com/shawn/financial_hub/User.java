@@ -1,6 +1,7 @@
 package com.shawn.financial_hub;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
 
@@ -10,6 +11,7 @@ import jakarta.persistence.*;
 public class User {
     @Id
     @GeneratedValue
+    @JsonProperty("user_id")
     private Long id;
 
     @Column(name = "first_name")

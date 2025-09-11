@@ -1,6 +1,10 @@
 package com.shawn.financial_hub;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.shawn.financial_hub.*;
 
@@ -23,10 +27,6 @@ public class FeedService {
         }
     }
 
-    public String getUrl() {
-        return feedRepo.getUrl();
-    }
-
     public void addUrl(String url, User user) {
         Feed exFeed = feedRepo.findByUrl(url);
         if (exFeed != null) {
@@ -34,6 +34,10 @@ public class FeedService {
         } else {
             saveUrl(user, url);
         }
+    }
+
+    public List<String> getUrls(Long user_id) {
+        return feedRepo.findUrlsbyUserId(user_id);
     }
 
 }

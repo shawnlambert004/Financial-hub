@@ -30,4 +30,9 @@ public class UserController {
         }
     }
 
+    @PostMapping("/getuserID")
+    public Long getUserId(@RequestBody feedDTO feedDTO) {
+        return userService.getUserId(feedDTO.username);
+    }
+
 } // UserControllere

@@ -5,6 +5,8 @@ import com.shawn.financial_hub.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -35,8 +37,8 @@ public class FeedController {
     }
 
     @GetMapping("/getUrl")
-    public String getUrl() {
-        return feedService.getUrl();
+    public List<String> getUrls(@RequestParam Long user_id) {
+        return feedService.getUrls(user_id);
     }
 }
 // EverySingle one
