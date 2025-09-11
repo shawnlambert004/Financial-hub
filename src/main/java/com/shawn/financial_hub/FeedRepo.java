@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface FeedRepo
                 extends JpaRepository<Feed, Long> {
         Feed findByUrl(String url);
+
+        String getUrl();
 }
 // FeedRepo

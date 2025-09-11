@@ -33,5 +33,10 @@ public class FeedController {
     public void delUrl(@RequestParam String url) {
         feedService.deleteUrl(url);
     }
+
+    @GetMapping("/getUrl")
+    public String getUrl() {
+        return feedService.getUrl();
+    }
 }
 // EverySingle one

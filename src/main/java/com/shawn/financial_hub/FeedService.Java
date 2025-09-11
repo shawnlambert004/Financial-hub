@@ -23,6 +23,10 @@ public class FeedService {
         }
     }
 
+    public String getUrl() {
+        return feedRepo.getUrl();
+    }
+
     public void addUrl(String url, User user) {
         Feed exFeed = feedRepo.findByUrl(url);
         if (exFeed != null) {
