@@ -36,9 +36,9 @@ public class FeedController {
         feedService.deleteUrl(url);
     }
 
-    @GetMapping("/getUrl")
-    public List<String> getUrls(@RequestParam Long user_id) {
-        return feedService.getUrls(user_id);
+    @PostMapping("/getUrl")
+    public List<String> getUrls(@RequestBody feedDTO feed) {
+        return feedService.getUrls(feed.user_id);
     }
 }
 // EverySingle one
