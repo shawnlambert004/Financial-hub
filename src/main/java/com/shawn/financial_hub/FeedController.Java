@@ -31,9 +31,10 @@ public class FeedController {
         return ResponseEntity.ok(userPossible);
     }
 
-    @PostMapping("/delUrl")
-    public void delUrl(@RequestParam String url) {
-        feedService.deleteUrl(url);
+    @DeleteMapping("/delUrl")
+    public ResponseEntity<?> delUrl(@RequestBody feedDTO feed) {
+        feedService.deleteUrl(feed.url);
+        return ResponseEntity.ok(feed.url);
     }
 
     @PostMapping("/getUrl")
