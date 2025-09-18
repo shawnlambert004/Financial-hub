@@ -13,6 +13,6 @@ public class RetrieveArticlesController {
 
     @PostMapping("/getArticles")
     public Article getarticle() {
-        return RetrieveArticles.getArticle();
+        return RetrieveArticlesService.getArticle();
     }
 }
