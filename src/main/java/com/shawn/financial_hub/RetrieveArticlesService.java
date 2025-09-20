@@ -25,11 +25,17 @@ public class RetrieveArticlesService {
 
             for (Element article : articles) {
                 String title = article.select("a.js-teaser-heading-link").text();
-                titles.add(title);
                 String Description = article.select("a.js-teaser-standfirst-link").text();
-                Descriptions.add(Description);
                 String imageUrl = article.select("img.o-teaser__image.o-lazy-load").attr("data-src");
-                imageUrls.add(imageUrl);
+
+                if (title == "" || imageUrl == "" || Description == "") {
+                    ;
+                } else {
+                    titles.add(title);
+                    Descriptions.add(Description);
+                    imageUrls.add(imageUrl);
+                }
+
             }
 
             arty.buildArticle(titles, Descriptions, imageUrls);
