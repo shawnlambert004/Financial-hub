@@ -17,6 +17,7 @@ public class RetrieveArticlesService {
         ArrayList<String> titles = new ArrayList<>();
         ArrayList<String> Descriptions = new ArrayList<>();
         ArrayList<String> imageUrls = new ArrayList<>();
+        ArrayList<String> contents = new ArrayList<>();
 
         try {
             Document document = Jsoup.connect(url).get();
@@ -27,18 +28,21 @@ public class RetrieveArticlesService {
                 String title = article.select("a.js-teaser-heading-link").text();
                 String Description = article.select("a.js-teaser-standfirst-link").text();
                 String imageUrl = article.select("img.o-teaser__image.o-lazy-load").attr("data-src");
+                String content = article.select("a.js-teaser-heading-link").attr("href");
+                String fullContent = "https://www.ft.com" + content;
 
-                if (title == "" || imageUrl == "" || Description == "") {
+                if (title == "" || imageUrl == "" || Description == "" || content == "") {
                     ;
                 } else {
                     titles.add(title);
                     Descriptions.add(Description);
                     imageUrls.add(imageUrl);
+                    contents.add(fullContent);
                 }
 
             }
 
-            arty.buildArticle(titles, Descriptions, imageUrls);
+            arty.buildArticle(titles, Descriptions, imageUrls, contents);
             return arty;
         } catch (IOException e) {
             e.printStackTrace();

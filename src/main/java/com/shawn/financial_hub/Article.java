@@ -7,17 +7,21 @@ public class Article {
     ArrayList<String> titles;
     ArrayList<String> Descriptions;
     ArrayList<String> imageUrls;
+    ArrayList<String> content;
 
-    public void buildArticle(ArrayList<String> title, ArrayList<String> Description, ArrayList<String> imageUrl) {
+    public void buildArticle(ArrayList<String> title, ArrayList<String> Description, ArrayList<String> imageUrl,
+            ArrayList<String> content) {
         this.titles = title;
         this.Descriptions = Description;
         this.imageUrls = imageUrl;
+        this.content = content;
     };
 
     public Article() {
         titles = new ArrayList<>();
         Descriptions = new ArrayList<>();
         imageUrls = new ArrayList<>();
+        content = new ArrayList<>();
 
     }
 
@@ -43,6 +47,14 @@ public class Article {
 
     public void setImageUrl(ArrayList<String> imageUrl) {
         this.imageUrls = imageUrl;
+    };
+
+    public ArrayList<String> getContents() {
+        return content;
+    };
+
+    public void setContents(ArrayList<String> content) {
+        this.content = content;
     };
 
 }
