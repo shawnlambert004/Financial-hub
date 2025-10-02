@@ -5,24 +5,24 @@ import java.util.List;
 
 public class Article {
     ArrayList<String> titles;
-    ArrayList<String> Descriptions;
     ArrayList<String> imageUrls;
-    ArrayList<String> content;
+    ArrayList<String> ArticleContent;
+    ArrayList<String> BigImUrls;
+    ArrayList<String> Sources;
+    ArrayList<String> ByLine = new ArrayList<>();
 
-    public void buildArticle(ArrayList<String> title, ArrayList<String> Description, ArrayList<String> imageUrl,
-            ArrayList<String> content) {
+    public void buildArticle(ArrayList<String> title, ArrayList<String> imageUrl, ArrayList<String> ArticleContent,
+            ArrayList<String> Sources, ArrayList<String> ByLine) {
         this.titles = title;
-        this.Descriptions = Description;
         this.imageUrls = imageUrl;
-        this.content = content;
+        this.ArticleContent = ArticleContent;
+        this.Sources = Sources;
+        this.ByLine = ByLine;
     };
 
     public Article() {
         titles = new ArrayList<>();
-        Descriptions = new ArrayList<>();
         imageUrls = new ArrayList<>();
-        content = new ArrayList<>();
-
     }
 
     public ArrayList<String> getTitle() {
@@ -33,14 +33,6 @@ public class Article {
         this.titles = title;
     };
 
-    public ArrayList<String> getDescription() {
-        return Descriptions;
-    };
-
-    public void setDescription(ArrayList<String> Description) {
-        this.Descriptions = Description;
-    };
-
     public ArrayList<String> getImageUrl() {
         return imageUrls;
     };
@@ -49,12 +41,28 @@ public class Article {
         this.imageUrls = imageUrl;
     };
 
-    public ArrayList<String> getContents() {
-        return content;
+    public ArrayList<String> getSources() {
+        return Sources;
     };
 
-    public void setContents(ArrayList<String> content) {
-        this.content = content;
+    public void setByLine(ArrayList<String> ByLine) {
+        this.ByLine = ByLine;
+    };
+
+    public ArrayList<String> getByLine() {
+        return ByLine;
+    };
+
+    public void setSources(ArrayList<String> Sources) {
+        this.Sources = Sources;
+    };
+
+    public ArrayList<String> getContents() {
+        return ArticleContent;
+    };
+
+    public void setContents(ArrayList<String> ArticleContent) {
+        this.ArticleContent = ArticleContent;
     };
 
 }

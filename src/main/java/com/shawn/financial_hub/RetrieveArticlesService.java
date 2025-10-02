@@ -12,37 +12,39 @@ import org.springframework.stereotype.Service;
 public class RetrieveArticlesService {
 
     public static Article getArticle() {
-        String url = "https://www.ft.com/world-uk?_gl=1*10sfbfj*_ga*MjAwMDM5OTM0NS4xNzUzNTI3Njky*_ga_2DSMN2JH8F*czE3NTgxMzcxOTQkbzI5JGcwJHQxNzU4MTM3MTk0JGo2MCRsMCRoMA..";
+        String url = "https://finance.yahoo.com/topic/economic-news/";
         Article arty = new Article();
         ArrayList<String> titles = new ArrayList<>();
-        ArrayList<String> Descriptions = new ArrayList<>();
         ArrayList<String> imageUrls = new ArrayList<>();
-        ArrayList<String> contents = new ArrayList<>();
+        ArrayList<String> ArticleContent = new ArrayList<>();
+        ArrayList<String> Sources = new ArrayList<>();
 
         try {
             Document document = Jsoup.connect(url).get();
             Elements articles = document
-                    .select(".o-teaser.o-teaser--article.o-teaser--small.o-teaser--has-image.js-teaser");
+                    .select("section.container.sz-xx-large.optimizedStream.yf-18vjxqk.responsive.rev");
 
             for (Element article : articles) {
-                String title = article.select("a.js-teaser-heading-link").text();
-                String Description = article.select("a.js-teaser-standfirst-link").text();
-                String imageUrl = article.select("img.o-teaser__image.o-lazy-load").attr("data-src");
-                String content = article.select("a.js-teaser-heading-link").attr("href");
-                String fullContent = "https://www.ft.com" + content;
-
-                if (title == "" || imageUrl == "" || Description == "" || content == "") {
+                String contentURL = article.select("a.subtle-link.fin-size-small.thumb.yf-iqvwrv").attr("href");
+                String title = article.select("img.tw-bg-opacity-25.yf-1ev0m0b").attr("alt");
+                String imageUrl = article.select("img.tw-bg-opacity-25.yf-1ev0m0b").attr("src");
+                String source = article.select(".publishing.yf-m1e6lz").text();
+                if (source.contains("Investing.com") || source.contains("StockStory")) {
                     ;
                 } else {
+                    Document doccy = Jsoup.connect(contentURL).get();
+                    Elements contents = doccy.select("p.yf-1090901");
+                    String Text = "";
+                    for (Element content : contents) {
+                        Text += content.text() + "\n\n";
+                    }
+                    ArticleContent.add(Text);
                     titles.add(title);
-                    Descriptions.add(Description);
                     imageUrls.add(imageUrl);
-                    contents.add(fullContent);
+                    Sources.add(source);
                 }
-
             }
-
-            arty.buildArticle(titles, Descriptions, imageUrls, contents);
+            arty.buildArticle(titles, imageUrls, ArticleContent, Sources);
             return arty;
         } catch (IOException e) {
             e.printStackTrace();
