@@ -9,21 +9,20 @@ public class Article {
     ArrayList<String> ArticleContent;
     ArrayList<String> BigImUrls;
     ArrayList<String> Sources;
-    ArrayList<String> ByLine = new ArrayList<>();
+    ArrayList<String> ByLine;
 
     public void buildArticle(ArrayList<String> title, ArrayList<String> imageUrl, ArrayList<String> ArticleContent,
-            ArrayList<String> Sources, ArrayList<String> ByLine) {
+            ArrayList<String> Sources, ArrayList<String> ByLine, ArrayList<String> BigImUrls) {
         this.titles = title;
         this.imageUrls = imageUrl;
         this.ArticleContent = ArticleContent;
         this.Sources = Sources;
         this.ByLine = ByLine;
+        this.BigImUrls = BigImUrls;
     };
 
     public Article() {
-        titles = new ArrayList<>();
-        imageUrls = new ArrayList<>();
-    }
+    };
 
     public ArrayList<String> getTitle() {
         return titles;
@@ -63,6 +62,14 @@ public class Article {
 
     public void setContents(ArrayList<String> ArticleContent) {
         this.ArticleContent = ArticleContent;
+    };
+
+    public ArrayList<String> getBigImUrls() {
+        return BigImUrls;
+    };
+
+    public void setBigIm(ArrayList<String> BigImUrls) {
+        this.BigImUrls = BigImUrls;
     };
 
 }

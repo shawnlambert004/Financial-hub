@@ -12,4 +12,6 @@ public interface articleRepo extends JpaRepository<SavedArticles, Long> {
 
     @Query(value = "SELECT* FROM application_articles WHERE user_id = :user_id", nativeQuery = true)
     List<SavedArticles> getArticles(Long user_id);
+
+    SavedArticles findByTitle(String title);
 }

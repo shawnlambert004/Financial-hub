@@ -18,6 +18,8 @@ public class RetrieveArticlesService {
         ArrayList<String> imageUrls = new ArrayList<>();
         ArrayList<String> ArticleContent = new ArrayList<>();
         ArrayList<String> Sources = new ArrayList<>();
+        ArrayList<String> ByLine = new ArrayList<>();
+        ArrayList<String> BigImUrls = new ArrayList<>();
 
         try {
             Document document = Jsoup.connect(url).get();
@@ -26,14 +28,23 @@ public class RetrieveArticlesService {
 
             for (Element article : articles) {
                 String contentURL = article.select("a.subtle-link.fin-size-small.thumb.yf-iqvwrv").attr("href");
+
+                if (contentURL.isEmpty()) {
+                    continue;
+                }
                 String title = article.select("img.tw-bg-opacity-25.yf-1ev0m0b").attr("alt");
                 String imageUrl = article.select("img.tw-bg-opacity-25.yf-1ev0m0b").attr("src");
                 String source = article.select(".publishing.yf-m1e6lz").text();
-                if (source.contains("Investing.com") || source.contains("StockStory")) {
+                if (source.contains("Investing.com") || source.contains("StockStory")
+                        || source.contains("Motley Fool") || source.contains("Bloomberg")
+                        || source.contains("Reuters") || source.contains("Yahoo Personal Finance")
+                        || source.contains("Benzinga")) {
                     ;
                 } else {
                     Document doccy = Jsoup.connect(contentURL).get();
                     Elements contents = doccy.select("p.yf-1090901");
+                    String byline = doccy.select("time.byline-attr-meta-time").text();
+                    String bigIm = doccy.select("meta[property='og:image']").attr("content");
                     String Text = "";
                     for (Element content : contents) {
                         Text += content.text() + "\n\n";
@@ -42,9 +53,11 @@ public class RetrieveArticlesService {
                     titles.add(title);
                     imageUrls.add(imageUrl);
                     Sources.add(source);
+                    ByLine.add(byline);
+                    BigImUrls.add(bigIm);
                 }
             }
-            arty.buildArticle(titles, imageUrls, ArticleContent, Sources);
+            arty.buildArticle(titles, imageUrls, ArticleContent, Sources, ByLine, BigImUrls);
             return arty;
         } catch (IOException e) {
             e.printStackTrace();
